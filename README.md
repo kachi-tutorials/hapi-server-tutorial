@@ -1,4 +1,4 @@
-# KOA Tutorial
+# Hapi JS Tutorial
 
 **`Hapi Js`** is a powerful and robust open-source node JS framework for developing JSON API. Hapi JS is one of the most preferred frameworks for node Js due to it's well-developed plugin system.
 
