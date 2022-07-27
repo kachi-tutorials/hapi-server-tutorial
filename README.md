@@ -1,14 +1,12 @@
 # Hapi JS Tutorial
 
-**`Hapi Js`** is a powerful and robust open-source node JS framework for developing JSON API. Hapi JS is one of the most preferred frameworks for node Js due to it's well-developed plugin system.
+**`Hapi Js`** is a powerful and robust open-source node JS framework for developing Json Api. Hapi JS is one of the most preferred frameworks for node Js due to it's well-developed plugin system.
 
 We'll be making a **`Hapi Js`** server from scratch using **Node Js**.
 
 ## Installation
 
-In order to follow this tutorial you will need to following:
-
-- You must have [**`Node`**](https://nodejs.org/en/download/) installed - ideally at the LTS _(long term support)_ version.
+In order to follow this tutorial you will need to following have [**`Node`**](https://nodejs.org/en/download/) installed - ideally at the LTS _(long term support)_ version.
 
 Run the following command on your terminal to check if you have node installed:
 
@@ -16,21 +14,21 @@ Run the following command on your terminal to check if you have node installed:
 node --version
 ```
 
-In this tutorial, I will be using [**Visual studio code**](https://code.visualstudio.com/) as the text editor and [**Postman**](https://www.postman.com/) for the **`HTTP requests`**, but feel free to use whichever tools you want.
+In this tutorial, I will be using [**Visual Studio Code**](https://code.visualstudio.com/) as the text editor and [**Postman**](https://www.postman.com/) for the **`HTTP requests`**, but feel free to use whichever tools you want.
 
 ## Set up
 
 Let's start by making running the following commands:
 
 ```bash
-mkdir hapi_tutorial
-cd hapi_tutorial
+mkdir hapi-tutorial
+cd hapi-tutorial
 npm init -y
 ```
 
 ### What did we just do?
 
-1. Creates a folder called **`hapi_tutorial`**.
+1. Creates a folder called **`hapi-tutorial`**.
 2. Should contain a file titled **`package.json`** file with the default values.
 
 Now we have our **`package.json`** file, let's install **`Hapi Js`** by running the following command in our terminal:
@@ -43,7 +41,7 @@ Your **`package.json`** file should now look something like this:
 
 ```json
 {
-  "name": "hapi_tutorial",
+  "name": "hapi-tutorial",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -59,11 +57,11 @@ Your **`package.json`** file should now look something like this:
 }
 ```
 
-Now we're ready to start creating your project!
+Now we're ready to start creating our project!
 
 ## Adding our files
 
-Next we'll be creating 3 files: **`index.js`**, **`server.js`** and **`router.js`** file.
+Next we'll be creating 3 files: an **`index.js`**, a **`server.js`** and a **`router.js`** file.
 
 Let's do that by running the following command in your terminal:
 
@@ -82,14 +80,22 @@ const router = [
   {
     method: "GET",
     path: "/",
-    handler: (req, h) => {
+    handler: (request, h) => {
       return "Hello World!";
-    },
-  },
+    }
+  }
 ];
 
 module.exports = router;
 ```
+
+### What did we just do?
+
+We've added a router array which will store all of our endpoints. Each endpoint must contain the following:
+
+- `Method`: In our case it is (`GET`).
+- `Path`: We're using `/` as we're just using the default path for now.
+- `Handler`: This handles our functionality. The first parameter is the `request`, which you access arguments such as `body` or `params`. The second parameter, `h` is the response toolkit, which is an object with several methods used to respond to the request.
 
 ## Server.js file
 
@@ -101,7 +107,7 @@ const router = require("./router");
 
 const server = Hapi.server({
   port: 8000,
-  host: "localhost",
+  host: "localhost"
 });
 
 router.forEach((path) => server.route(path));
@@ -129,8 +135,8 @@ const server = require("./server");
 Let's break this down what we've done:
 
 1. We're importing our server from **`server.js`**
-2. We're creating a self calling **async** function.
-3. First we'll start the server and then if it's successful it will log the server endpoint
+2. We're creating a self calling **`async`** function.
+3. When the server starts, it will log the server endpoint.
 
 So let's run our app to make sure. Let's just run this command in our terminal:
 
@@ -157,9 +163,7 @@ mkdir controllers
 touch controllers/events.controllers.js
 ```
 
-We'll call our first controller **`events.controllers.js`**.
-
-Add the following code into our **`events.controllers.js`** file:
+We'll call our first controller **`events.controllers.js`**, add the following code into our **`events.controllers.js`** file:
 
 ```javascript
 const events_db = [];
@@ -176,7 +180,7 @@ const postEvent = (request, h) => {
 
 module.exports = {
   getEvents,
-  postEvent,
+  postEvent
 };
 ```
 
@@ -200,18 +204,18 @@ const router = [
     path: "/",
     handler: (req, h) => {
       return "Hello World!";
-    },
+    }
   },
   {
     method: "POST",
     path: "/post_event",
-    handler: postEvent,
+    handler: postEvent
   },
   {
     method: "GET",
     path: "/events_list",
-    handler: getEvents,
-  },
+    handler: getEvents
+  }
 ];
 
 module.exports = router;

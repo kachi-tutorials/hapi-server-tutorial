@@ -12,5 +12,5 @@ const postEvent = (request, h) => {
 
 module.exports = {
   getEvents,
-  postEvent,
+  postEvent
 };
